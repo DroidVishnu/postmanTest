@@ -1,0 +1,740 @@
+{
+  "info": {
+    "_postman_id": "eafce6b4-4e87-4be4-a749-d9ddc21ce0ee",
+    "name": "Brightlime Automation",
+    "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+  },
+  "item": [
+    {
+      "_postman_id": "87f42fc2-9325-4566-b503-4fa706813580",
+      "name": "auth",
+      "description": "Folder for auth",
+      "item": [
+        {
+          "_postman_id": "aeaa2c24-17c5-4581-af3a-ba21d23139c0",
+          "name": "/auth",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "bdaee0cd-dc31-48f7-8aab-d0370e2d1a92",
+                "type": "text/javascript",
+                "exec": [
+                  "var data = JSON.parse(responseBody);",
+                  "",
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "",
+                  "pm.test(\"Content-Type is present\", function () {",
+                  "    pm.response.to.have.header(\"Content-Type\");",
+                  "});",
+                  "",
+                  "pm.test(\"Content-Type is Json\", function () {",
+                  "    //pm.response.to.have.header(\"application/json\");",
+                  "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.eql(\"application/json\");",
+                  "});",
+                  "",
+                  "pm.test(\"Response time is less than 200ms\", function () {",
+                  "    pm.expect(pm.response.responseTime).to.be.below(2000);",
+                  "});",
+                  "",
+                  "/*pm.test(\"More than one results\", function () {",
+                  "    pm.expect(pm.response.json().User.length).to.be.above(0);",
+                  "",
+                  "});*/",
+                  "",
+                  "pm.test(\"Contains TOken\", function () {",
+                  "    pm.expect(pm.response.text()).to.include(\"Token\");",
+                  "});",
+                  "",
+                  "",
+                  "",
+                  "pm.test(\"save token to variable\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.environment.set('token', jsonData.User.Token);",
+                  "    console.warn(jsonData.User.Token)",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "apikey",
+                "value": "{{apiKey}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"data\":{\n    \t\n        \"email\": \"phil.moss@brightlime.com\",\n        \"password_\": \"aU8l007av\",\n         \"password\": \"myfitapp\",\n        \"locale\": \"de_DE\"\n    }\n}"
+            },
+            "url": "{{url}}/auth"
+          },
+          "response": [
+            {
+              "id": "15da8e85-2e24-4709-b8e0-a2d54a0b2be2",
+              "name": "https://bl-api.myfitapp.de/dev/auth",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json",
+                    "warning": ""
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "warning": ""
+                  },
+                  {
+                    "key": "apikey",
+                    "value": "{{apiKey}}",
+                    "warning": ""
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"data\":{\n    \t\n        \"email\": \"stag-bl+bannatyne.751695@brightlime.com\",\n        \"password\": \"aU8l007av\",\n        \"locale\": \"de_DE\"\n    }\n}"
+                },
+                "url": "https://bl-api.myfitapp.de/stage/bannatyne/auth"
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "name": "content-length",
+                  "key": "content-length",
+                  "value": "8272",
+                  "description": "The length of the response body in octets (8-bit bytes)"
+                },
+                {
+                  "name": "content-type",
+                  "key": "content-type",
+                  "value": "application/json",
+                  "description": "The mime type of this content"
+                },
+                {
+                  "name": "date",
+                  "key": "date",
+                  "value": "Fri, 16 Feb 2018 05:22:42 GMT",
+                  "description": "The date and time that the message was sent"
+                },
+                {
+                  "name": "status",
+                  "key": "status",
+                  "value": "200",
+                  "description": "Custom header"
+                },
+                {
+                  "name": "x-amzn-requestid",
+                  "key": "x-amzn-requestid",
+                  "value": "6906da78-12d9-11e8-bb51-1de7812c89f6",
+                  "description": "Custom header"
+                },
+                {
+                  "name": "x-amzn-trace-id",
+                  "key": "x-amzn-trace-id",
+                  "value": "sampled=0;root=1-5a866aa1-93468a3eb16c588218321db9",
+                  "description": "Custom header"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"User\" : {\n    \"UserSource\" : 216,\n    \"UserId\" : 751695,\n    \"Token\" : \"NVZHOUZZdkxIeHRqR0s0bjAyS2xTWE1JRFN4Nm11RUt4ZitzOFM2MEswUT06OjwELnTXqBH134J1JjZCT00\",\n    \"ImageId\" : 16647,\n    \"hasSwipe\" : 1,\n    \"Identity\" : {\n      \"Number\" : \"MR4255\",\n      \"FirstName\" : \"Matthew\",\n      \"LastName\" : \"Gardner\",\n      \"DisplayName\" : \"Matthew Gardner\",\n      \"Salutation\" : \"Mr Gardner\",\n      \"Title\" : \"Mr\",\n      \"Gender\" : \"M\",\n      \"PrefLang\" : \"en\",\n      \"ClubId\" : 60,\n      \"Swipe\" : \"36066735848487428\",\n      \"JDate\" : \"2011-06-08T00:00:00.000Z\",\n      \"IdNumber\" : \"\",\n      \"Password\" : \"\"\n    },\n    \"ContactDetails\" : {\n      \"FaxNo\" : \"\",\n      \"WorkTelNo\" : \"\",\n      \"HomeTelNo\" : \"\",\n      \"MobileTelNo\" : \"07653327825\",\n      \"Email\" : \"stag-bl+bannatyne.751695@brightlime.com\",\n      \"JunkMail\" : \"\",\n      \"AltContact\" : \"\",\n      \"EmergencyName\" : \"\",\n      \"EmergencyRelationship\" : \"\",\n      \"EmergencyMobile\" : \"\"\n    },\n    \"UserAddress\" : {\n      \"Line1\" : \"15 bellingham road\",\n      \"Line2\" : \"\",\n      \"Line3\" : \"\",\n      \"Town\" : \"Chorlton\",\n      \"County\" : \"Manchester\",\n      \"PostCode\" : \"M21 7DA\",\n      \"Country\" : \"\"\n    },\n    \"AccessStatus\" : {\n      \"SyncId\" : \"\",\n      \"AccessToClubIds\" : [\n                                                    3\n                            ,                                                    4\n                            ,                                                    5\n                            ,                                                    6\n                            ,                                                    7\n                            ,                                                    8\n                            ,                                                    9\n                            ,                                                    10\n                            ,                                                    11\n                            ,                                                    12\n                            ,                                                    13\n                            ,                                                    14\n                            ,                                                    15\n                            ,                                                    16\n                            ,                                                    17\n                            ,                                                    18\n                            ,                                                    19\n                            ,                                                    20\n                            ,                                                    21\n                            ,                                                    22\n                            ,                                                    23\n                            ,                                                    24\n                            ,                                                    25\n                            ,                                                    26\n                            ,                                                    27\n                            ,                                                    28\n                            ,                                                    29\n                            ,                                                    30\n                            ,                                                    31\n                            ,                                                    32\n                            ,                                                    33\n                            ,                                                    34\n                            ,                                                    35\n                            ,                                                    36\n                            ,                                                    37\n                            ,                                                    38\n                            ,                                                    39\n                            ,                                                    40\n                            ,                                                    41\n                            ,                                                    42\n                            ,                                                    43\n                            ,                                                    44\n                            ,                                                    45\n                            ,                                                    46\n                            ,                                                    47\n                            ,                                                    48\n                            ,                                                    49\n                            ,                                                    50\n                            ,                                                    51\n                            ,                                                    52\n                            ,                                                    53\n                            ,                                                    54\n                            ,                                                    55\n                            ,                                                    56\n                            ,                                                    57\n                            ,                                                    58\n                            ,                                                    59\n                            ,                                                    60\n                            ,                                                    61\n                            ,                                                    62\n                            ,                                                    63\n                            ,                                                    65\n                            ,                                                    66\n                            ,                                                    67\n                            ,                                                    68\n                            ,                                                    69\n                            ,                                                    71\n                            ,                                                    72\n                            ,                                                    73\n                                                                            ],\n      \"ErrorCodes\" : [\n                                                 \"\"\n                                                                        ],\n      \"Source\" : 216,\n      \"SourceId\" : 751695,\n      \"SourceCode\" : \"MR4255\",\n      \"Swipe\" : \"36066735848487428\",\n      \"Forename\" : \"Matthew\",\n      \"Surname\" : \"Gardner\",\n      \"DisplayName\" : \"Matthew Gardner\",\n      \"ClubId\" : 60,\n      \"TypeId\" : 100,\n      \"RestrictedTime\" : false,\n      \"Allowed\" : true,\n      \"AccessTier\" : \"1\",\n      \"WarningCodes\" : \"Array\",\n      \"Messages\" : \"Array\",\n      \"RecheckDueDate\" : \"2018-02-06T00:00:00.000Z\",\n      \"CardIssueNo\" : \"\",\n      \"LimitedUse\" : false,\n      \"LimitedPeriod\" : \"\",\n      \"LimitedMax\" : 0,\n      \"LimitedCount\" : \"0\",\n      \"LimitedStart\" : \"1900-01-01T00:00:00.000Z\",\n      \"LimitedReset\" : \"1900-01-01T00:00:00.000Z\"\n    },\n    \"Strikes\" : \"5\",\n    \"BannedUntil\" : \"2018-03-16\",\n    \"BlockOnStrikeCount\" : \"3\",\n    \"PolicyStatus\" : \"1\",\n    \"IsHead\" : true,\n    \"GroupId\" : 751695,\n    \"AllowedZones\" : [\n                                        ]\n  },\n  \"Success\" : true,\n  \"Status\" : \"Login successful\",\n  \"ErrorCode\" : \"\",\n  \"ErrorTitle\" : \"\",\n  \"ErrorDescription\" : \"\"\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "_postman_id": "e39a563a-bd3d-40b8-8459-d1e970f237a0",
+      "name": "classes",
+      "description": "Folder for classes",
+      "item": [
+        {
+          "_postman_id": "795e5b08-d858-4a5a-8779-fa04f0f7a407",
+          "name": "/classes",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "39b28996-4208-4d1b-ac34-c05726415355",
+                "type": "text/javascript",
+                "exec": [
+                  "var classSize;",
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "",
+                  "pm.test(\"Content-Type is present\", function () {",
+                  "    pm.response.to.have.header(\"Content-Type\");",
+                  "});",
+                  "",
+                  "pm.test(\"Content-Type is Json\", function () {",
+                  "    //pm.response.to.have.header(\"application/json\");",
+                  "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.eql(\"application/json\");",
+                  "});",
+                  "",
+                  "pm.test(\"Response time is less than 1000ms\", function () {",
+                  "    pm.expect(pm.response.responseTime).to.be.below(2000);",
+                  "});",
+                  "",
+                  "pm.test(\"More than one results\", function () {",
+                  "    //pm.expect(pm.response.json().resources.length).to.be.above(0);",
+                  "    //console.warn(pm.response.json().Sessions.length).to.be.above(0);",
+                  "    pm.expect(pm.response.json().Sessions.length).to.be.above(1);",
+                  "    classSize = pm.response.json().Sessions.length;",
+                  "    //pm.globals.set(\"length\", pm.response.json().Sessions.length);",
+                  "    ",
+                  "",
+                  "});",
+                  "",
+                  "pm.test(\"Select Class\", function () {",
+                  "    console.log(\"class size is \" + classSize);",
+                  "    var instance;",
+                  "    for(var i =0; i<classSize; i++)",
+                  "    {",
+                  "        var selectedIndex = Math.floor(Math.random() * (classSize - 0));",
+                  "       // console.log(\"selected index is  \" + selectedIndex);",
+                  "        instance = pm.response.json().Sessions[selectedIndex];",
+                  "        if(instance.UserBookingStatus === \"AVAILABLE\")",
+                  "        {",
+                  "            console.log(\"selected index is  \" + selectedIndex);",
+                  "            console.log(\"instanceId of selected class is \" + instance.InstanceID);",
+                  "            pm.environment.set(\"instanceId\", instance.InstanceID);",
+                  "            break;",
+                  "        }",
+                  "    }",
+                  "    ",
+                  "    ",
+                  "    ",
+                  "});",
+                  ""
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "token",
+                "value": "{{token}}"
+              },
+              {
+                "key": "apikey",
+                "value": "{{apiKey}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n\"data\":{\n    \"filters\":{\n          \"AllowedClubs\": [],\n          \"AllowedZones\": [],\n          \"Clubs\": [4],\n          \"Types\": [],\n          \"ExcludedTypes\": [],\n          \"Activities\": [],\n          \"Sessions\": [],\n          \"DateFrom\": \"\",\n          \"futureDays\" : 3,\n          \"DateTo\": \"\"\n    },\n    \"locale\":\"de_DE\"\n  }\n}"
+            },
+            "url": "{{url}}/classes"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "cb221726-838c-4355-bde4-1b2005d46cc7",
+          "name": "singleClass",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "778dc214-7eb3-4647-b624-5a186f20387a",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "",
+                  "pm.test(\"Content-Type is present\", function () {",
+                  "    pm.response.to.have.header(\"Content-Type\");",
+                  "});",
+                  "",
+                  "pm.test(\"Content-Type is Json\", function () {",
+                  "    //pm.response.to.have.header(\"application/json\");",
+                  "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.eql(\"application/json\");",
+                  "});",
+                  "",
+                  "pm.test(\"Response time is less than 200ms\", function () {",
+                  "    pm.expect(pm.response.responseTime).to.be.below(2000);",
+                  "});",
+                  "",
+                  "/*pm.test(\"More than one results\", function () {",
+                  "    pm.expect(pm.response.json().data.size).to.be.above(0);",
+                  "",
+                  "});*/",
+                  "",
+                  "pm.test(\"Validate instanceId\", function () {",
+                  "    console.log(\"Single class instance id is: \" + pm.response.json().data.InstanceID);",
+                  "    pm.expect(pm.response.json().data.InstanceID).to.eql(pm.environment.get(\"instanceId\"));",
+                  "});",
+                  ""
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "apikey",
+                "value": "{{apiKey}}"
+              },
+              {
+                "key": "token",
+                "value": "{{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": "{{url}}/classes/{{instanceId}}"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "_postman_id": "35822333-1c62-4f94-bd14-35862854da95",
+      "name": "book",
+      "description": "Folder for book",
+      "item": [
+        {
+          "_postman_id": "f1c95689-6afa-47aa-ba76-3b2edb91d590",
+          "name": "/book",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "a72fbd9c-977c-4a58-8e3c-8571c511611e",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "",
+                  "pm.test(\"Content-Type is present\", function () {",
+                  "    pm.response.to.have.header(\"Content-Type\");",
+                  "});",
+                  "",
+                  "pm.test(\"Content-Type is Json\", function () {",
+                  "    //pm.response.to.have.header(\"application/json\");",
+                  "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.eql(\"application/json\");",
+                  "});",
+                  "",
+                  "pm.test(\"Response time is less than 200ms\", function () {",
+                  "    pm.expect(pm.response.responseTime).to.be.below(2000);",
+                  "});",
+                  "",
+                  "/*pm.test(\"More than one results\", function () {",
+                  "    pm.expect(pm.response.json().length).to.be.above(0);",
+                  "",
+                  "});*/",
+                  "",
+                  "pm.test(\"Validate booking is success\", function () {",
+                  "    pm.expect(pm.response.json().Status).to.eql(\"Booking has been made successfully\");",
+                  "});",
+                  "",
+                  "pm.test(\"Validate bookingID is present\", function () {",
+                  "    pm.expect(pm.response.json()).to.have.property('BookingId');",
+                  "});",
+                  "",
+                  "pm.test(\"store booking id\", function () {",
+                  "    //console.log(\"Single class instance id is: \" + pm.response.json().data.InstanceID);",
+                  "    pm.environment.set(\"bookingId\", pm.response.json().BookingId);",
+                  "});",
+                  "",
+                  ""
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "apikey",
+                "value": "{{apiKey}}"
+              },
+              {
+                "key": "token",
+                "value": "{{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "{{url}}/book?instanceId={{instanceId}}&locale={{locale}}",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "book"
+              ],
+              "query": [
+                {
+                  "key": "instanceId",
+                  "value": "{{instanceId}}",
+                  "equals": true
+                },
+                {
+                  "key": "locale",
+                  "value": "{{locale}}",
+                  "equals": true
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "_postman_id": "f407cf9b-1464-4742-8348-b06f74f60ae3",
+      "name": "mybookings",
+      "description": "Folder for mybookings",
+      "item": [
+        {
+          "_postman_id": "164b5578-cf80-4a3e-89e9-0441232ffca3",
+          "name": "/mybookings",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "fd9c8eb3-82dd-42c0-8944-132b6998728b",
+                "type": "text/javascript",
+                "exec": [
+                  "var classSize;",
+                  "",
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "",
+                  "pm.test(\"Content-Type is present\", function () {",
+                  "    pm.response.to.have.header(\"Content-Type\");",
+                  "});",
+                  "",
+                  "pm.test(\"Content-Type is Json\", function () {",
+                  "    //pm.response.to.have.header(\"application/json\");",
+                  "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.eql(\"application/json\");",
+                  "});",
+                  "",
+                  "pm.test(\"Response time is less than 200ms\", function () {",
+                  "    pm.expect(pm.response.responseTime).to.be.below(2000);",
+                  "});",
+                  "",
+                  "pm.test(\"Validate bookings are returned\", function () {",
+                  "       pm.expect(pm.response.json().Sessions.length).to.be.above(0);",
+                  "       classSize = pm.response.json().Sessions.length;",
+                  "",
+                  "});",
+                  "",
+                  "pm.test(\"Validate booked class is present\", function () {",
+                  "    console.log(\"class size is \" + classSize);",
+                  "    var instanceid = pm.environment.get(\"instanceId\");",
+                  "    var instance;",
+                  "    for(var i =0; i<classSize; i++)",
+                  "    {",
+                  "      ",
+                  "        instance = pm.response.json().Sessions[i];",
+                  "        if(instance.InstanceID === instanceid)",
+                  "        {",
+                  "            console.log(\"instanceId of selected class is \" + instance.InstanceID + \" is Present\");",
+                  "            break;",
+                  "        }",
+                  "    }",
+                  "",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "apikey",
+                "value": "{{apiKey}}"
+              },
+              {
+                "key": "token",
+                "value": "{{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "{{url}}/mybookings?locale={{locale}}&showHistory={{showHistory}}",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "mybookings"
+              ],
+              "query": [
+                {
+                  "key": "locale",
+                  "value": "{{locale}}",
+                  "equals": true
+                },
+                {
+                  "key": "showHistory",
+                  "value": "{{showHistory}}",
+                  "equals": true
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "_postman_id": "0399bf99-f515-423d-b0b1-449a6116f0cc",
+      "name": "cancel",
+      "description": "Folder for cancel",
+      "item": [
+        {
+          "_postman_id": "8d4991ef-eebf-4545-b882-3fc528714d8b",
+          "name": "/cancel",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "8b64c718-fe56-4bec-a036-a7824508e139",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "",
+                  "pm.test(\"Content-Type is present\", function () {",
+                  "    pm.response.to.have.header(\"Content-Type\");",
+                  "});",
+                  "",
+                  "pm.test(\"Content-Type is Json\", function () {",
+                  "    //pm.response.to.have.header(\"application/json\");",
+                  "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.eql(\"application/json\");",
+                  "});",
+                  "",
+                  "pm.test(\"Response time is less than 200ms\", function () {",
+                  "    pm.expect(pm.response.responseTime).to.be.below(2000);",
+                  "});",
+                  "",
+                  "/*pm.test(\"More than one results\", function () {",
+                  "    pm.expect(pm.response.json().length).to.be.above(0);",
+                  "",
+                  "});*/",
+                  "",
+                  "pm.test(\"Validate cancellation is success\", function () {",
+                  "    pm.expect(pm.response.json().Success).to.eql(true);",
+                  "    pm.expect(pm.response.json().Status).to.eql(\"Booking has been cancelled successfully\");",
+                  "});",
+                  ""
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "apikey",
+                "value": "{{apiKey}}"
+              },
+              {
+                "key": "token",
+                "value": "{{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "{{url}}/cancel?locale={{locale}}&bookingId={{bookingId}}",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "cancel"
+              ],
+              "query": [
+                {
+                  "key": "locale",
+                  "value": "{{locale}}",
+                  "equals": true
+                },
+                {
+                  "key": "bookingId",
+                  "value": "{{bookingId}}",
+                  "equals": true
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "_postman_id": "c08fae01-63b4-4d00-bbbf-05abc2764705",
+      "name": "testFolder",
+      "description": "",
+      "item": [
+        {
+          "_postman_id": "f3fc4aa4-7f39-4a71-9fc1-f6f9f45e9fb4",
+          "name": "/cancel Copy",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "8b64c718-fe56-4bec-a036-a7824508e139",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "",
+                  "pm.test(\"Content-Type is present\", function () {",
+                  "    pm.response.to.have.header(\"Content-Type\");",
+                  "});",
+                  "",
+                  "pm.test(\"Content-Type is Json\", function () {",
+                  "    //pm.response.to.have.header(\"application/json\");",
+                  "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.eql(\"application/json\");",
+                  "});",
+                  "",
+                  "pm.test(\"Response time is less than 200ms\", function () {",
+                  "    pm.expect(pm.response.responseTime).to.be.below(2000);",
+                  "});",
+                  "",
+                  "/*pm.test(\"More than one results\", function () {",
+                  "    pm.expect(pm.response.json().length).to.be.above(0);",
+                  "",
+                  "});*/",
+                  "",
+                  "pm.test(\"Validate cancellation is success\", function () {",
+                  "    pm.expect(pm.response.json().Success).to.eql(true);",
+                  "    pm.expect(pm.response.json().Status).to.eql(\"Booking has been cancelled successfully\");",
+                  "});",
+                  ""
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "apikey",
+                "value": "{{apiKey}}"
+              },
+              {
+                "key": "token",
+                "value": "{{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "{{url}}/cancel?locale={{locale}}&bookingId={{bookingId}}",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "cancel"
+              ],
+              "query": [
+                {
+                  "key": "locale",
+                  "value": "{{locale}}",
+                  "equals": true
+                },
+                {
+                  "key": "bookingId",
+                  "value": "{{bookingId}}",
+                  "equals": true
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
